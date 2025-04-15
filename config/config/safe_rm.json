@@ -1,0 +1,8 @@
+
+{
+    "mode": "interactive",
+    "protected_paths": [
+        "/var/www/prod",
+        "/data/critical"
+    ]
+}
