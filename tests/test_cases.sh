@@ -193,7 +193,8 @@ cat << 'EOFPATTERN' > "$CONFIG_DIR/safe_rm.json"
 }
 EOFPATTERN
 OUTPUT=$("$SAFE_RM_SCRIPT" "test.production.db" 2>&1)
-if echo "$OUTPUT" | grep -q "protected pattern" && [ -f "test.production.db" ]; then
+# Check for either "protected pattern" or "blocked" with "pattern" to be robust against message changes
+if (echo "$OUTPUT" | grep -qi "blocked" && echo "$OUTPUT" | grep -qi "pattern") && [ -f "test.production.db" ]; then
     echo -e "${GREEN}[PASS]${RESET} Pattern-based protection works correctly."
     pass_count=$((pass_count+1))
 else

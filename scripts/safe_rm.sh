@@ -121,8 +121,10 @@ check_protected_path() {
 
 check_protected_pattern() {
     local abs_path="$1"
+    local pattern
     
     for pattern in $PROTECTED_PATTERNS; do
+        # Pattern must be unquoted on the right side of =~ for regex matching
         if [[ "$abs_path" =~ $pattern ]]; then
             return 0
         fi
@@ -280,7 +282,8 @@ for target in "${TARGETS[@]}"; do
             if [[ "$PROMPT_TIMEOUT" -gt 0 ]]; then
                 echo -e "${YELLOW}Proceed with deletion? (y/N) [${PROMPT_TIMEOUT}s timeout]:${RESET} "
                 read -t "$PROMPT_TIMEOUT" -r response
-                if [[ $? -gt 128 ]]; then
+                read_exit_code=$?
+                if [[ $read_exit_code -gt 128 ]]; then
                     echo ""
                     print_info "Timeout reached. Deletion cancelled for $ABS_PATH"
                     log_action "DELETE_ATTEMPT" "$ABS_PATH" "TIMEOUT_CANCELLED"
