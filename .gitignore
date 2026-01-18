@@ -1,0 +1,22 @@
+# Log files (keep directory structure, ignore actual logs)
+logs/*.log
+
+# Backup files
+*.backup.*
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor/IDE files
+*.swp
+*.swo
+.idea/
+.vscode/
+*.sublime-*

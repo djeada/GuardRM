@@ -1,8 +1,16 @@
-
 {
     "mode": "interactive",
     "protected_paths": [
         "/var/www/prod",
-        "/data/critical"
-    ]
+        "/data/critical",
+        "/etc",
+        "/boot",
+        "/usr"
+    ],
+    "protected_patterns": [
+        ".*\\.production\\..*",
+        ".*\\.prod\\.db$"
+    ],
+    "enable_logging": true,
+    "prompt_timeout": 0
 }
